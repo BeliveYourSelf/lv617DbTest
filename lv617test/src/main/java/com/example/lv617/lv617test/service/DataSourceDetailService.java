@@ -13,7 +13,7 @@ public interface DataSourceDetailService {
      *@创建人  lv617
      *@创建时间  2018/9/4 16:52
      */
-    List<Map<String, Object>> getDataSourceDetail(String tableName);
+    List<Map<String, Object>> getDataSourceDetail(String dbName,String tableName);
     /**
      *  描述：根据数据库名称获取数据库中表的名称和注释
      *
@@ -27,5 +27,5 @@ public interface DataSourceDetailService {
      *@创建人  lv617
      *@创建时间  2018/9/4 16:52
      */
-    void toWord(List<Map<String, Object>> listAll) throws FileNotFoundException, DocumentException;
+    void toWord(List<Map<String, Object>> listAll,String dbName) throws FileNotFoundException, DocumentException;
 }

@@ -1,6 +1,10 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
+### VSCODE ###
+.idea
+.DS_Store
+
 ### STS ###
 .apt_generated
 .classpath
