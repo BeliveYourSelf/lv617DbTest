@@ -37,7 +37,7 @@ public class DataSourceDetailControler {
     public String getDbDetail(String dbName){
         try {
             List<Map<String,Object>> list = this.dataSourceDetailService.getAllDataSourceName(dbName);
-            this.dataSourceDetailService.toWord(list);
+            this.dataSourceDetailService.toWord(list,dbName);
         } catch (Exception e) {
             e.printStackTrace();
             return "生成数据库表设计文档失败";

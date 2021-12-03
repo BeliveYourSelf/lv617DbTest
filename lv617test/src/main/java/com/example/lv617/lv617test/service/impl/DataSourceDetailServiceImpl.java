@@ -28,8 +28,8 @@ public class DataSourceDetailServiceImpl implements DataSourceDetailService {
     private DataSourceMapper dataSourceMapper;
 
     @Override
-    public List<Map<String, Object>> getDataSourceDetail(String tableName) {
-        return dataSourceMapper.getDataDetail(tableName);
+    public List<Map<String, Object>> getDataSourceDetail(String dbName,String tableName) {
+        return dataSourceMapper.getDataDetail(dbName, tableName);
     }
 
     @Override
@@ -38,11 +38,11 @@ public class DataSourceDetailServiceImpl implements DataSourceDetailService {
     }
 
     @Override
-    public void toWord(List<Map<String, Object>> listAll) throws FileNotFoundException, DocumentException {
+    public void toWord(List<Map<String, Object>> listAll, String dbName) throws FileNotFoundException, DocumentException {
         // 创建word文档,并设置纸张的大小
         Document document = new Document(PageSize.A4);
         // 创建word文档
-        RtfWriter2.getInstance(document, new FileOutputStream("D:/data/dbDetail.doc"));
+        RtfWriter2.getInstance(document, new FileOutputStream("dbDetail.doc"));
         document.open();// 设置文档标题
         Paragraph ph = new Paragraph();
         Font f = new Font();
@@ -52,11 +52,12 @@ public class DataSourceDetailServiceImpl implements DataSourceDetailService {
         ph.setFont(f);/* * 创建表格 通过查询出来的表遍历 */
         for (int i = 0; i < listAll.size(); i++) {
             // 表名
-            String table_name = (String) listAll.get(i).get("table_name");
+            String table_name = (String) listAll.get(i).get("TABLE_NAME");
+            //System.out.println("111"+table_name);
             // 表说明
-            String table_comment = (String) listAll.get(i).get("table_comment");
+            String table_comment = (String) listAll.get(i).get("TABLE_COMMENT");
             //获取某张表的所有字段说明
-            List<Map<String, Object>> list = this.getDataSourceDetail(table_name);
+            List<Map<String, Object>> list = this.getDataSourceDetail(dbName,table_name);
             //构建表说明
             String all = "" + (i + 1) + " 表名：" + table_name + " " + table_comment + "";
             //创建有6列的表格
